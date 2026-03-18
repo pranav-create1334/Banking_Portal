@@ -1,22 +1,240 @@
-body{
-  margin:0;
-  font-family: "Inter", sans-serif;
-  background:#F4F7FB;
-  color:#1F2937;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.app-container{
-  display:flex;
+/* BODY */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #0f172a;
+  color: white;
 }
 
-.main-content{
-  flex:1;
-  padding:30px;
+/* FLEX CENTER */
+.center-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.card{
-  background:#FFFFFF;
-  border-radius:10px;
-  padding:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+/* CARD */
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  color: #000;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* INPUT */
+.input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* BUTTON */
+.button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* LOGO */
+.logo {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+  }
+}
+.app-container {
+  display: flex;
+  min-height: calc(100vh - 60px); /* adjust if navbar height differs */
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #020617;
+  color: white;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: #f8fafc;
+  overflow-y: auto;
+  color: black;
+}
+/* ============================= */
+/* RESPONSIVE APP LAYOUT */
+/* ============================= */
+
+.app-container {
+  display: flex;
+  min-height: calc(100vh - 60px);
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #020617;
+  color: white;
+  padding: 20px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: #f8fafc;
+  overflow-y: auto;
+  color: black;
+}
+
+/* ============================= */
+/* MOBILE RESPONSIVENESS */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .app-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: 100%;
+    width: 220px;
+    transform: translateX(-100%);
+    z-index: 1000;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    padding: 15px;
+  }
+}
+/* ============================= */
+/* DASHBOARD GRID */
+/* ============================= */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* TOP CARDS */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* MAIN SECTION */
+.dashboard-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .dashboard-main {
+    grid-template-columns: 1fr;
+  }
+}
+/* ============================= */
+/* DASHBOARD LAYOUT UPGRADE */
+/* ============================= */
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ACCOUNTS ROW */
+.accounts-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* BALANCE SECTION */
+.balance-section {
+  width: 100%;
+}
+
+/* MIDDLE GRID */
+.middle-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* TRANSACTIONS */
+.transactions-section {
+  width: 100%;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .middle-section {
+    grid-template-columns: 1fr;
+  }
+}
+/* APP LAYOUT */
+.app-container {
+  display: flex;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ✅ MOBILE FIX */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
 }

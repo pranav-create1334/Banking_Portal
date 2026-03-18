@@ -10,50 +10,40 @@ const UserLogin = () => {
 
   const handleLogin = () => {
     if (!isValid) return;
-
-    console.log("Login Attempt:", { mobile, mpin });
-    alert("Login Successful (UI only)");
+    alert("Login Success (UI)");
   };
 
   return (
-    <div style={container}>
+    <div className="center-container">
 
-      <div style={card}>
+      <div className="card">
 
-        {/* LOGO */}
-        <img src={logo} alt="logo" style={logoStyle} />
+        <img src={logo} alt="logo" className="logo" />
 
-        <h2 style={title}>User Login</h2>
+        <h2>User Login</h2>
 
-        {/* MOBILE */}
         <input
           type="text"
-          placeholder="Enter Mobile Number"
+          placeholder="Mobile Number"
           value={mobile}
           onChange={(e) => setMobile(e.target.value.replace(/\D/g, ""))}
           maxLength={10}
-          style={input}
+          className="input"
         />
 
-        {/* MPIN */}
         <input
           type="password"
-          placeholder="Enter MPIN"
+          placeholder="MPIN"
           value={mpin}
           onChange={(e) => setMpin(e.target.value.replace(/\D/g, ""))}
           maxLength={4}
-          style={input}
+          className="input"
         />
 
-        {/* BUTTON */}
         <button
           onClick={handleLogin}
           disabled={!isValid}
-          style={{
-            ...button,
-            opacity: isValid ? 1 : 0.5,
-            cursor: isValid ? "pointer" : "not-allowed"
-          }}
+          className="button"
         >
           Login
         </button>
@@ -65,50 +55,3 @@ const UserLogin = () => {
 };
 
 export default UserLogin;
-
-/* ---------- STYLES ---------- */
-
-const container = {
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "linear-gradient(135deg, #0F172A, #1E293B)",
-};
-
-const card = {
-  background: "#ffffff",
-  padding: "30px",
-  borderRadius: "12px",
-  width: "320px",
-  textAlign: "center",
-  boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-};
-
-const logoStyle = {
-  width: "60px",
-  marginBottom: "10px",
-};
-
-const title = {
-  marginBottom: "20px",
-};
-
-const input = {
-  width: "100%",
-  padding: "10px",
-  margin: "8px 0",
-  borderRadius: "8px",
-  border: "1px solid #ccc",
-};
-
-const button = {
-  width: "100%",
-  padding: "10px",
-  marginTop: "15px",
-  borderRadius: "8px",
-  border: "none",
-  background: "#0F172A",
-  color: "white",
-  fontWeight: "600",
-};

@@ -8,10 +8,10 @@ import SpendingChart from "../components/dashboard/SpendingChart";
 const Dashboard = () => {
 
   return (
-    <div>
+    <div className="dashboard-container">
 
       {/* Accounts Row */}
-      <div style={{display:"flex", gap:"20px", flexWrap:"wrap"}}>
+      <div className="accounts-row">
         <AccountCard
           type="Savings Account"
           balance="₹80,000"
@@ -26,25 +26,18 @@ const Dashboard = () => {
       </div>
 
       {/* Balance */}
-      <div style={{marginTop:"20px"}}>
+      <div className="balance-section">
         <BalanceCard />
       </div>
 
       {/* Middle Section */}
-      <div style={{
-        display:"grid",
-        gridTemplateColumns:"2fr 1fr",
-        gap:"20px",
-        marginTop:"20px"
-      }}>
-
+      <div className="middle-section">
         <SpendingChart />
         <QuickTransfer />
-
       </div>
 
       {/* Transactions */}
-      <div style={{marginTop:"20px"}}>
+      <div className="transactions-section">
         <RecentTransactions />
       </div>
 
