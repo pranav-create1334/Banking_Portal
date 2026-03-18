@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 const QuickTransfer = () => {
+
+  const [account, setAccount] = useState("");
+  const [amount, setAmount] = useState("");
+
+  const handleTransfer = () => {
+
+    if (!account || !amount) {
+      toast.error("All fields are required");
+      return;
+    }
+
+    if (amount <= 0) {
+      toast.error("Invalid amount");
+      return;
+    }
+
+    toast.success("Transfer Successful (UI only)");
+  };
 
   return (
     <div className="card">
@@ -9,15 +28,19 @@ const QuickTransfer = () => {
 
       <input
         placeholder="Enter Account Number"
+        value={account}
+        onChange={(e) => setAccount(e.target.value)}
         style={inputStyle}
       />
 
       <input
         placeholder="Amount"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
         style={inputStyle}
       />
 
-      <button style={btnStyle}>
+      <button style={btnStyle} onClick={handleTransfer}>
         Send Money
       </button>
 
