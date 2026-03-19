@@ -1,47 +1,45 @@
-import React from "react";
+import Layout from "../components/common/Layout";
 import BalanceCard from "../components/dashboard/BalanceCard";
 import RecentTransactions from "../components/dashboard/RecentTransactions";
-import AccountCard from "../components/dashboard/AccountCard";
 import QuickTransfer from "../components/dashboard/QuickTransfer";
 import SpendingChart from "../components/dashboard/SpendingChart";
 
 const Dashboard = () => {
-
   return (
-    <div className="dashboard-container">
+    <Layout>
+      <div className="w-full max-w-7xl mx-auto">
 
-      {/* Accounts Row */}
-      <div className="accounts-row">
-        <AccountCard
-          type="Savings Account"
-          balance="₹80,000"
-          number="**** 1234"
-        />
+        {/* Top spacing */}
+        <div className="mb-4">
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Dashboard
+          </h1>
+        </div>
 
-        <AccountCard
-          type="Current Account"
-          balance="₹44,500"
-          number="**** 5678"
-        />
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          {/* Force equal height behavior */}
+          <div className="h-full">
+            <BalanceCard />
+          </div>
+
+          <div className="h-full">
+            <QuickTransfer />
+          </div>
+
+          <div className="h-full">
+            <SpendingChart />
+          </div>
+
+          {/* Full width section */}
+          <div className="col-span-1 md:col-span-2 lg:col-span-3">
+            <RecentTransactions />
+          </div>
+
+        </div>
       </div>
-
-      {/* Balance */}
-      <div className="balance-section">
-        <BalanceCard />
-      </div>
-
-      {/* Middle Section */}
-      <div className="middle-section">
-        <SpendingChart />
-        <QuickTransfer />
-      </div>
-
-      {/* Transactions */}
-      <div className="transactions-section">
-        <RecentTransactions />
-      </div>
-
-    </div>
+    </Layout>
   );
 };
 

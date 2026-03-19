@@ -4,16 +4,15 @@ import logo from "../../assets/logo.png";
 import { menuItems } from "../../config/menu";
 
 const Navbar = ({ toggleSidebar }) => {
-
-  const [open, setOpen] = useState(false);         // profile dropdown
-  const [menuOpen, setMenuOpen] = useState(false); // ☰ dropdown
+  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const navigate = useNavigate();
   const dropdownRef = useRef();
   const menuRef = useRef();
 
-  // ✅ Responsive detection
+  /* ✅ Responsive */
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -22,7 +21,7 @@ const Navbar = ({ toggleSidebar }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ Close dropdowns on outside click
+  /* ✅ Close outside */
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -36,19 +35,16 @@ const Navbar = ({ toggleSidebar }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 🔥 ☰ CLICK HANDLER
   const handleMenuClick = () => {
     if (isMobile) {
       setMenuOpen(!menuOpen);
     } else {
-      toggleSidebar(); // desktop behavior
+      toggleSidebar();
     }
   };
 
-  // 🔥 COMBINED MENU
   const combinedMenu = ["Home", ...menuItems];
 
-  // 🔥 ROUTE MAP
   const pathMap = {
     Home: "/",
     Dashboard: "/",
@@ -59,29 +55,32 @@ const Navbar = ({ toggleSidebar }) => {
     Analytics: "/analytics",
     "AI Assistant": "/ai",
     Security: "/security",
-    Support: "/support"
+    Support: "/support",
   };
 
   return (
-    <nav style={navStyle}>
+    <nav className="flex items-center justify-between px-5 h-14 bg-slate-950 text-white shadow-md">
 
       {/* LEFT */}
-      <div style={leftSection} ref={menuRef}>
+      <div className="flex items-center gap-3 relative" ref={menuRef}>
 
-        <span style={menuIcon} onClick={handleMenuClick}>
+        <button
+          onClick={handleMenuClick}
+          className="text-xl cursor-pointer"
+        >
           ☰
-        </span>
+        </button>
 
-        <img src={logo} alt="FinGuard AI" style={logoStyle} />
-        <h2 style={titleStyle}>FinGuard AI</h2>
+        <img src={logo} alt="FinGuard AI" className="w-9 h-9" />
+        <h2 className="text-lg font-semibold">FinGuard AI</h2>
 
         {/* MOBILE MENU */}
         {menuOpen && isMobile && (
-          <div style={menuDropdown}>
+          <div className="absolute top-14 left-0 bg-white text-black rounded-lg shadow-lg w-56 py-2 z-50">
             {combinedMenu.map((item, index) => (
               <p
                 key={index}
-                style={itemStyle}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                 onClick={() => {
                   setMenuOpen(false);
                   navigate(pathMap[item] || "/");
@@ -92,112 +91,37 @@ const Navbar = ({ toggleSidebar }) => {
             ))}
           </div>
         )}
-
       </div>
 
       {/* RIGHT PROFILE */}
-      <div style={{ position: "relative" }} ref={dropdownRef}>
+      <div className="relative" ref={dropdownRef}>
 
-        <span
-          style={profileStyle}
+        <button
           onClick={() => setOpen(!open)}
+          className="text-xl cursor-pointer"
         >
           👤
-        </span>
+        </button>
 
         {open && (
-          <div style={dropdownStyle}>
-            <p style={itemStyle} onClick={() => navigate("/auth/user-login")}>
+          <div className="absolute right-0 top-12 bg-white text-black rounded-lg shadow-lg w-44 py-2 z-50">
+            <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+               onClick={() => navigate("/auth/user-login")}>
               User Login
             </p>
-            <p style={itemStyle} onClick={() => navigate("/auth/admin-login")}>
+            <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+               onClick={() => navigate("/auth/admin-login")}>
               Admin Login
             </p>
-            <p style={itemStyle} onClick={() => navigate("/auth/employee-login")}>
+            <p className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+               onClick={() => navigate("/auth/employee-login")}>
               Employee Login
             </p>
           </div>
         )}
-
       </div>
-
     </nav>
   );
 };
 
 export default Navbar;
-
-/* ---------- STYLES ---------- */
-
-const navStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "12px 20px",
-  background: "#020617",
-  color: "white",
-  height: "60px",
-};
-
-const leftSection = {
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  position: "relative",
-};
-
-const menuIcon = {
-  fontSize: "22px",
-  cursor: "pointer",
-  marginRight: "10px",
-};
-
-const logoStyle = {
-  width: "36px",
-  height: "36px",
-};
-
-const titleStyle = {
-  fontSize: "18px",
-  fontWeight: "600",
-};
-
-const profileStyle = {
-  fontSize: "22px",
-  cursor: "pointer",
-};
-
-/* PROFILE DROPDOWN */
-
-const dropdownStyle = {
-  position: "absolute",
-  right: 0,
-  top: "45px",
-  background: "white",
-  color: "black",
-  borderRadius: "8px",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-  padding: "10px 0",
-  width: "180px",
-  zIndex: 1000,
-};
-
-const itemStyle = {
-  padding: "10px 15px",
-  cursor: "pointer",
-};
-
-/* MOBILE MENU */
-
-const menuDropdown = {
-  position: "absolute",
-  top: "55px",
-  left: "0",
-  background: "white",
-  color: "black",
-  borderRadius: "8px",
-  boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-  width: "220px",
-  padding: "10px 0",
-  zIndex: 1000,
-};
