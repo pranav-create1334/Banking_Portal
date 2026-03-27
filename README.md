@@ -13,7 +13,7 @@ A modern, secure, and responsive banking web application built using React + Vit
 ⚡ Fast performance with Vite
 🛠️ Tech Stack
 Frontend: React, Vite
-Styling: Tailwind CSS / CSS Modules
+Styling:  CSS Modules
 State Management: React Hooks / Context API
 Icons & UI: Lucide Icons / Custom Components
 
